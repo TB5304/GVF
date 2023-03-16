@@ -125,10 +125,11 @@ def hydraulic_calculator(shape, Y0, B, n, S0):
 st.title('Hydraulic Calculator')
 st.sidebar.header('Input Parameters')
 shape = st.sidebar.selectbox('Select channel shape', ['Rectangle', 'Circle', 'Triangle', 'Parabola', 'Trapezoid'])
-Y0 = st.sidebar.number_input('Enter depth of flow Y0 (m)', min_value=0.0, max_value=10.0, value=1.0, step=0.1)
-B = st.sidebar.number_input('Enter bottom width B (m)', min_value=0.0, max_value=10.0, value=1.0, step=0.1)
-n = st.sidebar.number_input('Enter Manning roughness coefficient n', min_value=0.001, max_value=0.1, value=0.003, step=0.001)
-S0 = st.sidebar.number_input('Enter channel bed slope S0', min_value=0.0, max_value=0.1, value=0.001, step=0.001) 
+Y0 = st.sidebar.number_input('Enter depth of flow Y0 (m)', step=0.0001)
+B = st.sidebar.number_input('Enter bottom width B (m)', step=0.0001)
+n = st.sidebar.number_input('Enter Manning roughness coefficient n',step=0.001)
+S0 = st.sidebar.number_input('Enter channel bed slope S0',step=0.0001) 
+#value = st.number_input("Enter a value:", step=0.0001)
 
 hydraulic_calculator(shape, Y0, B, n, S0)
 
