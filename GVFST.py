@@ -109,18 +109,18 @@ def hydraulic_calculator(shape, Y0, B, n, S0):
 
         # Display results
         st.write('Results:')
+        st.write(f'Reservoir water level (Y0) = {Y0}')
+        st.write(f'Critical height (yc) = {yc}')
+        st.write(f'Unit discharge from reservoir (q) = {q}')        
         st.write(f'Discharge (Q) = {Q} m^3/s')
         st.write(f'Flow area (A) = {A} m^2')
         st.write(f'Wetted perimeter (P) = {P} m')
         st.write(f'Hydraulic radius (R) = {R} m')
-        st.write(f'Normal depth (yn) = {yn} m')
-        st.write(f'Critical slope (SC) = {SC}')        
-        st.write(f'Reservoir water level (Y0) = {Y0}')
-        st.write(f'Critical height (yc) = {yc}')        
-        st.write(f'Unit discharge from reservoir (q) = {q}')        
+        st.write(f'Critical slope (SC) = {SC}')
         st.write(f'GVF profile = {GVF_profile}')        
         st.write(f'Water profile = {water_profile}')
-
+        st.write(f'Normal depth (yn) = {yn} m')
+        
 # Define app layout
 st.title('Hydraulic Calculator')
 st.sidebar.header('Input Parameters')
