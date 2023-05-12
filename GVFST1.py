@@ -8,7 +8,7 @@ import streamlit as st
 import math
 
 def hydraulic_calculator(SC, Y0, B, n, S0):
-    
+    if st.button('Calculate'):
         ST='NA'
         if S==0:
             ST=1
@@ -100,13 +100,9 @@ def hydraulic_calculator(SC, Y0, B, n, S0):
         st.write(f'Flow area (A) = {A} m^2')
         st.write(f'Wetted perimeter (P) = {P} m')
         st.write(f'Hydraulic radius (R) = {R} m')
-#         st.write(f'Normal depth (yn) = {yn} m')
-#         st.write(f'Critical slope (SC) = {SC}')        
-#         st.write(f'Reservoir water level (Y0) = {Y0}')
         st.write(f'Critical height (yc) = {yc}')        
         st.write(f'Unit discharge from reservoir (q) = {q}')        
         st.write(f'GVF profile = {GVF_profile}')        
-#         st.write(f'Water profile = {water_profile}')
 
 # Define app layout
 st.title('Hydraulic Calculator')
