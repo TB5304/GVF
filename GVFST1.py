@@ -73,7 +73,7 @@ def hydraulic_calculator(SC, Y0, B, n, S0):
 # Define app layout
 st.title('Hydraulic Calculator')
 st.sidebar.header('Input Parameters')
-SC = st.sidebar.number_input('EnterSide Slope 1:X)', min_value=0.0, max_value=10.0, value=1.0, step=0.1)
+SC = st.sidebar.number_input('EnterSide Slope 1:X', min_value=0.0, max_value=10.0, value=1.0, step=0.1)
 Y0 = st.sidebar.number_input('Enter depth of flow Y0 (m)', min_value=0.0, max_value=10.0, value=1.0, step=0.1)
 Q = st.sidebar.number_input('Enter Q', min_value=0.0, max_value=10.0, value=1.0, step=0.1)
 B = st.sidebar.number_input('Enter bottom width B (m)', min_value=0.0, max_value=10.0, value=1.0, step=0.1)
