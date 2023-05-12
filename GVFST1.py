@@ -75,7 +75,7 @@ Y0 = st.sidebar.number_input('Enter depth of flow Y0 (m)', min_value=0.0, max_va
 Q = st.sidebar.number_input('Enter Q', min_value=0.0, max_value=10.0, value=1.0, step=0.1)
 B = st.sidebar.number_input('Enter bottom width B (m)', min_value=0.0, max_value=10.0, value=1.0, step=0.1)
 n = st.sidebar.number_input('Enter Manning roughness coefficient n', min_value=0.01, max_value=0.1, value=0.03, step=0.01)
-S0 = st.sidebar.number_input('Enter channel bed slope S0', min_value=0.0001, max_value=1000, value=0.0004, step=0.0001)
+S0 = st.sidebar.number_input('Enter channel bed slope S0', min_value=0.0001, max_value=100.0000, value=0.0004, step=0.0001)
 
 hydraulic_calculator(SC, Y0, B, n, S0)
 
