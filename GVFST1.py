@@ -63,7 +63,7 @@ def hydraulic_calculator(SC, Y0, B, n, S0):
         st.write(f'Flow area (A) = {A} m^2')
         st.write(f'Wetted perimeter (P) = {P} m')
         st.write(f'Hydraulic radius (R) = {R} m')
-        st.write(f'Critical height (yc) = {yc}')        
+        st.write(f'Critical height (Yc) = {yc}')        
         st.write(f'Unit discharge from reservoir (q) = {q}')        
         st.write(f'GVF profile = {GVF_profile}')        
 
