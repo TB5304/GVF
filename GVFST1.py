@@ -59,41 +59,6 @@ def hydraulic_calculator(SC, Y0, B, n, S0):
         else:
                 GVF_profile = "Error: invalid input"
 
-            # Determine the water profile
-#         if GVF_profile == "Mild slope":
-#                 if yn <= yc:
-#                     water_profile = "M1"
-#                 elif yc < yn < Y0:
-#                     water_profile = "M2"
-#                 else:
-#                     water_profile = "M3"
-#         elif GVF_profile == "Critical slope":
-#                 if yn <= yc:
-#                     water_profile = "C1"
-#                 elif yc < yn < Y0:
-#                     water_profile = "C2"
-#                 else:
-#                     water_profile = "C3"
-#         elif GVF_profile == "Steep slope":
-#                 if yn <= yc:
-#                     water_profile = "S1"
-#                 elif yc < yn < Y0:
-#                     water_profile = "S2"
-#                 else:
-#                     water_profile = "S3"
-#         elif GVF_profile == "Adverse slope":
-#                 if yn <= Y0:
-#                     water_profile = "A1"
-#                 else:
-#                     water_profile = "A2"
-#         elif GVF_profile == "Horizontal slope":
-#                 if yn <= Y0:
-#                     water_profile = "H1"
-#                 else:
-#                     water_profile = "H2"
-#         else:
-#                 water_profile = "Error: invalid input"
-
         # Display results
         st.write('Results:')
         st.write(f'Discharge (Q) = {Q} m^3/s')
@@ -113,5 +78,5 @@ B = st.sidebar.number_input('Enter bottom width B (m)', min_value=0.0, max_value
 n = st.sidebar.number_input('Enter Manning roughness coefficient n', min_value=0.01, max_value=0.1, value=0.03, step=0.01)
 S0 = st.sidebar.number_input('Enter channel bed slope S0', min_value=0.0, max_value=0.1, value=0.01, step=0.001) 
 
-hydraulic_calculator(shape, Y0, B, n, S0)
+hydraulic_calculator(SC, Y0, B, n, S0)
 
