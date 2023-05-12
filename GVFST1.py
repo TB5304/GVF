@@ -10,9 +10,9 @@ import math
 def hydraulic_calculator(SC, Y0, B, n, S0):
     if st.button('Calculate'):
         ST='NA'
-        if SC==0:
+        if SC==0.0000:
             shape='Rectangle'
-        elif b==0:
+        elif B==0:
             shape='Triangle'
         else:
             shape='Trapezoid'
