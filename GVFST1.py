@@ -10,14 +10,11 @@ import math
 def hydraulic_calculator(SC, Y0, B, n, S0):
     if st.button('Calculate'):
         ST='NA'
-        if S==0:
-            ST=1
+        if SC==0:
             shape='Rectangle'
         elif b==0:
-            ST=3
             shape='Triangle'
         else:
-            ST=2
             shape='Trapezoid'
         if shape == 'Rectangle':
                 A=B*Y0
@@ -78,7 +75,7 @@ Y0 = st.sidebar.number_input('Enter depth of flow Y0 (m)', min_value=0.0, max_va
 Q = st.sidebar.number_input('Enter Q', min_value=0.0, max_value=10.0, value=1.0, step=0.1)
 B = st.sidebar.number_input('Enter bottom width B (m)', min_value=0.0, max_value=10.0, value=1.0, step=0.1)
 n = st.sidebar.number_input('Enter Manning roughness coefficient n', min_value=0.01, max_value=0.1, value=0.03, step=0.01)
-S0 = st.sidebar.number_input('Enter channel bed slope S0', min_value=0.0, max_value=0.1, value=0.01, step=0.001) 
+S0 = st.sidebar.number_input('Enter channel bed slope S0', min_value=0.0000, max_value=1000, value=0.0004, step=0.0001) 
 
 hydraulic_calculator(SC, Y0, B, n, S0)
 
