@@ -6,15 +6,13 @@
 
 import streamlit as st
 import math
-
-def calculate():
-    S = float(st.text_input("Enter the slope (S): "))
-    Yn = float(st.text_input("Enter the normal depth (Yn): "))
-    B = float(st.text_input("Enter the width (B): "))
-    n = float(st.text_input("Enter the Manning's roughness coefficient (n): "))
-    S0 = float(st.text_input("Enter the bottom slope (S0): "))
-    Y = float(st.text_input("Flow Depth (Y): "))
-    
+S = float(st.text_input("Enter the slope (S): "))
+Yn = float(st.text_input("Enter the normal depth (Yn): "))
+B = float(st.text_input("Enter the width (B): "))
+n = float(st.text_input("Enter the Manning's roughness coefficient (n): "))
+S0 = float(st.text_input("Enter the bottom slope (S0): "))
+Y = float(st.text_input("Flow Depth (Y): "))
+def calculate(S,Yn,B,n,S0,Y):
     t = 1
     shape = 'NA'
     if float(S) == 0.000:
@@ -83,5 +81,4 @@ def calculate():
     st.write("Critical depth = {:.2f".format(Yc))
     st.write("Slope Type= ",st)
     st.write("Curve Type= ",curve)
-
-
+calculate(S,Yn,B,n,S0,Y)
