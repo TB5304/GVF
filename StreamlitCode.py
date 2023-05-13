@@ -6,12 +6,14 @@
 
 import streamlit as st
 import math
-S = float(st.text_input("Enter the slope (S): "))
-Yn = float(st.text_input("Enter the normal depth (Yn): "))
-B = float(st.text_input("Enter the width (B): "))
-n = float(st.text_input("Enter the Manning's roughness coefficient (n): "))
-S0 = float(st.text_input("Enter the bottom slope (S0): "))
-Y = float(st.text_input("Flow Depth (Y): "))
+with st.sidebar:
+    st.write("## Input Parameters")
+    S = st.number_input("Slope (S)", value=0.01)
+    Yn = st.number_input("Normal Depth (Yn)", value=1.0)
+    B = st.number_input("Width (B)", value=1.0)
+    n = st.number_input("Manning's Roughness Coefficient (n)", value=0.013)
+    S0 = st.number_input("Bottom Slope (S0)", value=0.0)
+    Y = st.number_input("Flow Depth (Y)", value=1.0)
 def calculate(S,Yn,B,n,S0,Y):
     t = 1
     shape = 'NA'
@@ -80,5 +82,6 @@ def calculate(S,Yn,B,n,S0,Y):
     st.write("Unit discharge = {:.2f}".format(q))
     st.write("Critical depth = {:.2f}".format(Yc))
     st.write("Slope Type= ",stype)
-    st.write("Curve Type= ",curve)
-calculate(S,Yn,B,n,S0,Y)
+    st.write("Curve Type= ",curve) 
+if st.sidebar.button("Calculate"):
+    calculate(S,Yn,B,n,S0,Y)
