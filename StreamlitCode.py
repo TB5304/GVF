@@ -80,5 +80,8 @@ def calculate():
     st.write("Hydraulic radius = {:.2f}".format(R))
     st.write("Discharge = {:.2f}".format(Q))
     st.write("Unit discharge = {:.2f}".format(q))
-    st.write("Critical depth = {:.2f
+    st.write("Critical depth = {:.2f".format(Yc))
+    st.write("Slope Type= ",st)
+    st.write("Curve Type= ",curve)
+
 
