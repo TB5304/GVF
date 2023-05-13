@@ -79,6 +79,6 @@ def calculate(S,Yn,B,n,S0,Y):
     st.write("Discharge = {:.2f}".format(Q))
     st.write("Unit discharge = {:.2f}".format(q))
     st.write("Critical depth = {:.2f}".format(Yc))
-    st.write("Slope Type= ",st)
+    st.write("Slope Type= ",stype)
     st.write("Curve Type= ",curve)
 calculate(S,Yn,B,n,S0,Y)
