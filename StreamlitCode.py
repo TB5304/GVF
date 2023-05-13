@@ -12,7 +12,7 @@ with st.sidebar:
     Yn = st.number_input("Normal Depth (Yn)", value=1.0)
     B = st.number_input("Width (B)", value=1.0)
     n = st.number_input("Manning's Roughness Coefficient (n)", value=0.013)
-    S0 = st.number_input("Bottom Slope (S0)", value=0.0)
+    S0 = st.number_input("Bottom Slope (S0)", value=0.0004)
     Y = st.number_input("Flow Depth (Y)", value=1.0)
 def calculate(S,Yn,B,n,S0,Y):
     t = 1
