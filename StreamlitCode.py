@@ -126,6 +126,6 @@ def calculate(S,Yn,B,n,S0,Y):
             else:
                 L=PL-DX
             #print(f'Area T={A} Wetted P={P} Hydraulic R={R} V={Q/A} E={E} Delta E={DE} Sf={Sf} Sf-{MSf} S0-Sf={S0_Sf} Delta X={DX} Length L={L}')    
-        st.write("Final Length After Iterations= ",L) 
+    st.write("Final Length After Iterations= ",L) 
 if st.sidebar.button("Calculate"):
     calculate(S,Yn,B,n,S0,Y)
