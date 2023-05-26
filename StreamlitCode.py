@@ -121,7 +121,7 @@ def calculate(S, Yn, B, n, S0, Y, UOD='NA', P=10):
                 L = -DX
             else:
                 L = PL - DX
-
+    st.write('Final Length=', L)
 def main():
     st.title("Hydraulic Calculations")
     S = st.sidebar.number_input("Slope (S)", value=0.000)
