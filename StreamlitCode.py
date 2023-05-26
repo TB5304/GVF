@@ -130,10 +130,11 @@ def main():
     B = st.sidebar.number_input("Bottom Width (B)", value=3.0)
     n = st.sidebar.number_input("Manning's Roughness Coefficient (n)", value=0.05)
     S0 = st.sidebar.number_input("Channel Bed Slope (S0)", value=1.5)
-    Y = st.sidebar.number_input("Flow Depth (Y)", value=1.2)
+    Y = st.sidebar.number_input("Specific Energy (Y)", value=1.2)
     UOD = st.sidebar.selectbox("Upstream or Downstream (UOD)", ["NA", "Upstream", "Downstream"])
     P = st.sidebar.number_input("Percentage Change in Perimeter (P)", value=10)
-    if st.button("Calculate"):
+
+    if st.button("Calculate", key="calculate_button"):
         calculate(S, Yn, B, n, S0, Y, UOD, P)
 
 if __name__ == '__main__':
