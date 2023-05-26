@@ -37,26 +37,26 @@ def calculate(S, Yn, B, n, S0, Y, UOD='NA', PC=10):
             Yc = ((q**2)/9.81) ** (1/3)
 
     if Yn > Yc:
-        st = "Mild"
+        stt = "Mild"
     elif Yn < Yc:
-        st = "Steep"
+        stt = "Steep"
     else:
-        st = "Critical"
+        stt = "Critical"
     Y0 = Yn
-    if st == "Mild" or st == "Steep":
+    if stt == "Mild" or stt == "Steep":
         if Y > Y0 and Y0 > Yc:
             Region = 1
         elif Y0 > Y and Y > Yc:
             Region = 2
         else:
             Region = 3 
-        curve = st[0] + str(Region)
+        curve = stt[0] + str(Region)
     else:
         if Y > Y0 and Y0 == Yc:
             Region = 1
         elif Y < Y0 and Y0 == Yc:
             Region = 3
-    curve = st[0] + str(Region)
+    curve = stt[0] + str(Region)
     
     st.write('Shape =', shape)
     st.write("Area = {:.2f}".format(A))
@@ -65,7 +65,7 @@ def calculate(S, Yn, B, n, S0, Y, UOD='NA', PC=10):
     st.write("Discharge = {:.2f}".format(Q))
     st.write("Unit discharge = {:.2f}".format(q))
     st.write("Critical depth = {:.2f}".format(Yc))
-    st.write("Slope Type = ", st)
+    st.write("Slope Type = ", stt)
     st.write("Curve Type = ", curve)
     
     ####################################GVF Length Calculation###########################
