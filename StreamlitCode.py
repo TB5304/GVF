@@ -133,8 +133,8 @@ def main():
     Y = st.sidebar.number_input("Flow Depth (Y)", value=1.2)
     UOD = st.sidebar.selectbox("Upstream or Downstream (UOD)", ["NA", "Upstream", "Downstream"])
     P = st.sidebar.number_input("Percentage Change in Perimeter (P)", value=10)
-
-    calculate(S, Yn, B, n, S0, Y, UOD, P)
+    if st.button("Calculate"):
+        calculate(S, Yn, B, n, S0, Y, UOD, P)
 
 if __name__ == '__main__':
     main()
