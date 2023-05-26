@@ -38,26 +38,26 @@ def calculate(S, Yn, B, n, S0, Y, UOD='NA', P=10):
             Yc = ((q**2)/9.81) ** (1/3)
 
     if Yn > Yc:
-        st = "Mild"
+        slope_type = "Mild"
     elif Yn < Yc:
-        st = "Steep"
+        slope_type = "Steep"
     else:
-        st = "Critical"
+        slope_type = "Critical"
     Y0=Yn
-    if st=="Mild" or st == "Steep":
-        if Y>Y0 and Y0>Yc:
-            Region=1
-        elif Y0>Y and Y>Yc:
-            Region=2
+    if slope_type == "Mild" or slope_type == "Steep":
+        if Y > Y0 and Y0 > Yc:
+            Region = 1
+        elif Y0 > Y and Y > Yc:
+            Region = 2
         else:
-            Region=3
-        curve=st[0]+str(Region)
+            Region = 3
+        curve = slope_type[0] + str(Region)
     else:
-        if Y>Y0 and Y0==Yc:
-            Region=1
-        elif Y<Y0 and Y0==Yc:
-            Region=3
-    curve=st[0]+str(Region)
+        if Y > Y0 and Y0 == Yc:
+            Region = 1
+        elif Y < Y0 and Y0 == Yc:
+            Region = 3
+    curve = slope_type[0] + str(Region)
 
     st.write('Shape =', shape)
     st.write("Area = {:.2f}".format(A))
@@ -66,20 +66,20 @@ def calculate(S, Yn, B, n, S0, Y, UOD='NA', P=10):
     st.write("Discharge = {:.2f}".format(Q))
     st.write("Unit discharge = {:.2f}".format(q))
     st.write("Critical depth = {:.2f}".format(Yc))
-    st.write("Slope Type =", st)
+    st.write("Slope Type =", slope_type)
     st.write("Curve Type =", curve)
 
     ####################################GVF Length Calculation###########################
     ## Calculating Middle Value
     if UOD == 'Upstream':
-        P = 1 + P / 100
+        P = 1 + P // 100
     elif UOD == 'Downstream':
-        P = 1 - P / 100
+        P = 1 - P // 100
     else:
         if int(curve[-1]) == 1 or int(curve[-1]) == 3:
-            P = 1 + P / 100
+            P = 1 + P // 100
         else:
-            P = 1 - P / 100
+            P = 1 - P // 100
     ed = Yn * P
     XXM = [Y, float((ed + Y) / 2), ed]
     st.write(XXM)
@@ -122,6 +122,7 @@ def calculate(S, Yn, B, n, S0, Y, UOD='NA', P=10):
             else:
                 L = PL - DX
     st.write('Final Length=', L)
+
 def main():
     st.title("Hydraulic Calculations")
     S = st.sidebar.number_input("Slope (S)", value=0.000)
