@@ -1,20 +1,8 @@
-#!/usr/bin/env python
-# coding: utf-8
-
-# In[ ]:
-
-
-import streamlit as st
 import math
-with st.sidebar:
-    st.write("## Input Parameters")
-    S = st.number_input("Slope (S)", value=0.01)
-    Yn = st.number_input("Normal Depth (Yn)", value=1.0)
-    B = st.number_input("Width (B)", value=1.0)
-    n = st.number_input("Manning's Roughness Coefficient (n)", value=0.013)
-    S0 = st.number_input("Bottom Slope (S0)", value=0.0004)
-    Y = st.number_input("Flow Depth (Y)", value=1.0)
-def calculate(S,Yn,B,n,S0,Y):
+import streamlit as st
+
+def calculate(S, Yn, B, n, S0, Y, UOD='NA', P=10):
+
     t = 1
     shape = 'NA'
     if float(S) == 0.000:
@@ -23,7 +11,7 @@ def calculate(S,Yn,B,n,S0,Y):
         shape = 'Triangle'
     else:
         shape = 'Trapezoid'
-    
+
     if t:
         if shape == 'Rectangle':
             A = B * Yn
@@ -32,7 +20,7 @@ def calculate(S,Yn,B,n,S0,Y):
             Q = (1/n) * (A) * (R**(2/3)) * (math.sqrt(S0))
             q = Q / B
             Yc = ((q ** 2 )/ (9.81)) ** (1 / 3)
-        
+
         elif shape == 'Triangle':
             A = S*(Yn**2)
             P = (2 * Yn )* math.sqrt(1 +( S ** 2))
@@ -40,7 +28,7 @@ def calculate(S,Yn,B,n,S0,Y):
             Q = (1/n) * (A) * (R**(2/3)) * (math.sqrt(S0))
             q = Q / 2
             Yc = ((2*(Q**2))/(9.81*(S**2)))**(1/5)
-            
+
         elif shape == 'Trapezoid':
             A = (B + S * Yn) * Yn
             P = B + (2 * Yn) * (math.sqrt(1 +(S ** 2)))
@@ -50,30 +38,27 @@ def calculate(S,Yn,B,n,S0,Y):
             Yc = ((q**2)/9.81) ** (1/3)
 
     if Yn > Yc:
-        stype = "Mild"
+        st = "Mild"
     elif Yn < Yc:
-        stype = "Steep"
+        st = "Steep"
     else:
-        stype = "Critical"
-        
-    Y0 = Yn
-    if stype == "Mild" or stype == "Steep":
-        if Y > Y0 and Y0 > Yc:
-            region = 1
-        elif Y0 > Y and Y > Yc:
-            region = 2
+        st = "Critical"
+    Y0=Yn
+    if st=="Mild" or st == "Steep":
+        if Y>Y0 and Y0>Yc:
+            Region=1
+        elif Y0>Y and Y>Yc:
+            Region=2
         else:
-            region = 3 
-        curve = stype[0] + str(region)
+            Region=3
+        curve=st[0]+str(Region)
     else:
-        if Y > Y0 and Y0 == Yc:
-            region = 1
-        elif Y < Y0 and Y0 == Yc:
-            region = 3
-            curve = stype[0] + str(region)
-        else:
-            curve = ""
-    
+        if Y>Y0 and Y0==Yc:
+            Region=1
+        elif Y<Y0 and Y0==Yc:
+            Region=3
+    curve=st[0]+str(Region)
+
     st.write('Shape =', shape)
     st.write("Area = {:.2f}".format(A))
     st.write("Wetted perimeter = {:.2f}".format(P))
@@ -81,51 +66,74 @@ def calculate(S,Yn,B,n,S0,Y):
     st.write("Discharge = {:.2f}".format(Q))
     st.write("Unit discharge = {:.2f}".format(q))
     st.write("Critical depth = {:.2f}".format(Yc))
-    st.write("Slope Type= ",stype)
-    st.write("Curve Type= ",curve) 
-    diff=(abs(Yn-Yc))/10
-    flag=0
-    for i in range(11):
-        if flag==0:
-            flag=1
-            Yn=Yc
+    st.write("Slope Type =", st)
+    st.write("Curve Type =", curve)
+
+    ####################################GVF Length Calculation###########################
+    ## Calculating Middle Value
+    if UOD == 'Upstream':
+        P = 1 + P / 100
+    elif UOD == 'Downstream':
+        P = 1 - P / 100
+    else:
+        if int(curve[-1]) == 1 or int(curve[-1]) == 3:
+            P = 1 + P / 100
         else:
-            Yn+=diff
-        
-        if shape=='Rectangle':
+            P = 1 - P / 100
+    ed = Yn * P
+    XXM = [Y, float((ed + Y) / 2), ed]
+    st.write(XXM)
+    flag = 0
+    E = 0
+    for i in range(3):
+        Yn = XXM[i]
+
+        if shape == 'Rectangle':
             A = B * Yn
             P = B + 2 * Yn
             R = A / P
-            
-        elif shape=='Triangle':
+
+        elif shape == 'Triangle':
             A = S*(Yn**2)
             P = (2 * Yn )* math.sqrt(1 +( S ** 2))
             R = A / P
-            
+
         else:
             A = (B + S * Yn) * Yn
             P = B + (2 * Yn) * (math.sqrt(1 +(S ** 2)))
             R = A / P
-        V=Q/A
+        V = Q / A
         ## TO Store Prev Values In Variables
-        if i>0:
-            PE=E
-            PSf=Sf
-            if i>1:
-                PL=L
+        if i > 0:
+            PE = E
+            PSf = Sf
+            if i > 1:
+                PL = L
         ## To Use Values Into Real Application
-        E=(Yn+(V**2)/(2*9.81))
-        Sf=((V*n)/(R**(2/3)))**2
-        if i>0:
-            DE=E-PE ## Delta E
-            MSf=((Sf+PSf)/2)     ## Mean Sf
-            S0_Sf=S0-MSf
-            DX=DE/S0_Sf
-            if i==1:
-                L=-DX
+        E = (Yn + (V ** 2) / (2 * 9.81))
+        Sf = ((V * n) / (R ** (2 / 3))) ** 2
+        if i > 0:
+            DE = E - PE  ## Delta E
+            MSf = ((Sf + PSf) / 2)  ## Mean Sf
+            S0_Sf = S0 - MSf
+            DX = DE / S0_Sf
+            if i == 1:
+                L = -DX
             else:
-                L=PL-DX
-            #print(f'Area T={A} Wetted P={P} Hydraulic R={R} V={Q/A} E={E} Delta E={DE} Sf={Sf} Sf-{MSf} S0-Sf={S0_Sf} Delta X={DX} Length L={L}')    
-    st.write("Final Length After Iterations= ",L) 
-if st.sidebar.button("Calculate"):
-    calculate(S,Yn,B,n,S0,Y)
+                L = PL - DX
+    st.write('Final Length=', L)
+def main():
+    st.title("Hydraulic Calculations")
+    S = st.sidebar.number_input("Slope (S)", value=0.000)
+    Yn = st.sidebar.number_input("Normal Depth (Yn)", value=2.0)
+    B = st.sidebar.number_input("Bottom Width (B)", value=3.0)
+    n = st.sidebar.number_input("Manning's Roughness Coefficient (n)", value=0.05)
+    S0 = st.sidebar.number_input("Channel Bed Slope (S0)", value=1.5)
+    Y = st.sidebar.number_input("Specific Energy (Y)", value=1.2)
+    UOD = st.sidebar.selectbox("Upstream or Downstream (UOD)", ["NA", "Upstream", "Downstream"])
+    P = st.sidebar.number_input("Percentage Change in Perimeter (P)", value=10)
+
+    calculate(S, Yn, B, n, S0, Y, UOD, P)
+
+if __name__ == '__main__':
+    main()
