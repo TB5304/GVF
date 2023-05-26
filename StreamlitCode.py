@@ -81,7 +81,6 @@ def calculate(S, Yn, B, n, S0, Y, UOD='NA', PC=10):
              PC = 1 - PC/100
     ed = Yn * PC
     XXM = [Y, float((ed + Y) / 2), ed]
-    st.write(XXM)
     flag = 0
     E = 0
     for i in range(3):
