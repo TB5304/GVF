@@ -1,7 +1,8 @@
 import math
 import streamlit as st
-
-def calculate(S, Yn, B, n, S0, Y, UOD='NA', PC=10):
+def calculate(S, Yn, B, n, S0, Y,UOD='NA',PC=10):
+    
+    
     t = 1
     shape = 'NA'
     if float(S) == 0.000:
@@ -42,21 +43,23 @@ def calculate(S, Yn, B, n, S0, Y, UOD='NA', PC=10):
         stt = "Steep"
     else:
         stt = "Critical"
-    Y0 = Yn
-    if stt == "Mild" or stt == "Steep":
-        if Y > Y0 and Y0 > Yc:
-            Region = 1
-        elif Y0 > Y and Y > Yc:
-            Region = 2
+    Y0=Yn
+    if stt=="Mild" or stt == "Steep":
+        if Y>Y0 and Y0>Yc:
+            Region=1
+        elif Y0>Y and Y>Yc:
+            Region=2
         else:
-            Region = 3 
-        curve = stt[0] + str(Region)
+            Region=3 
+        curve=stt[0]+str(Region)
     else:
-        if Y > Y0 and Y0 == Yc:
-            Region = 1
-        elif Y < Y0 and Y0 == Yc:
-            Region = 3
-    curve = stt[0] + str(Region)
+        if Y>Y0 and Y0==Yc:
+            Region=1
+        elif Y<Y0 and Y0==Yc:
+            Region=3
+    curve=stt[0]+str(Region)
+    
+    
     
     st.write('Shape =', shape)
     st.write("Area = {:.2f}".format(A))
@@ -68,60 +71,61 @@ def calculate(S, Yn, B, n, S0, Y, UOD='NA', PC=10):
     st.write("Slope Type = ", stt)
     st.write("Curve Type = ", curve)
     
+        
     ####################################GVF Length Calculation###########################
     ## Calculating Middle Value
-    if UOD == 'U':
-        PC = 1 + PC/100
-    elif UOD == 'D':
-        PC = 1 - PC/100
+    if UOD=='U':
+        PC=1+PC/100
+    elif UOD=='D':
+        PC=1-PC/100
     else:
-        if int(curve[-1]) == 1 or int(curve[-1]) == 3:
-             PC = 1 + PC/100
+        if int(curve[-1])==1 or int(curve[-1])==3:
+             PC=1+PC/100
         else:
-             PC = 1 - PC/100
-    ed = Yn * PC
-    XXM = [Y, float((ed + Y) / 2), ed]
-    st.write(XXM)
-    flag = 0
-    E = 0
+             PC=1-PC/100
+    ed=Yn*PC
+    XXM=[Y,float((ed+Y)/2),ed]
+    print(XXM)
+    flag=0
+    E=0
     for i in range(3):
-        Yn = XXM[i]
+        Yn= XXM[i]
         
-        if shape == 'Rectangle':
+        if shape=='Rectangle':
             A = B * Yn
             P = B + 2 * Yn
             R = A / P
             
-        elif shape == 'Triangle':
+        elif shape=='Triangle':
             A = S*(Yn**2)
-            P = (2 * Yn) * math.sqrt(1 + (S ** 2))
+            P = (2 * Yn )* math.sqrt(1 +( S ** 2))
             R = A / P
             
         else:
             A = (B + S * Yn) * Yn
-            P = B + (2 * Yn) * (math.sqrt(1 + (S ** 2)))
+            P = B + (2 * Yn) * (math.sqrt(1 +(S ** 2)))
             R = A / P
-        V = Q / A
+        V=Q/A
         ## TO Store Prev Values In Variables
-        if i > 0:
-            PE = E
-            PSf = Sf
-            if i > 1:
-                PL = L
+        if i>0:
+            PE=E
+            PSf=Sf
+            if i>1:
+                PL=L
         ## To Use Values Into Real Application
-        E = (Yn + (V ** 2) / (2 * 9.81))
-        Sf = ((V * n) / (R ** (2/3))) ** 2
-        if i > 0:
-            DE = E - PE ## Delta E
-            MSf = ((Sf + PSf) / 2)     ## Mean Sf
-            S0_Sf = S0 - MSf
-            DX = DE / S0_Sf
-            if i == 1:
-                L = -DX
+        E=(Yn+(V**2)/(2*9.81))
+        Sf=((V*n)/(R**(2/3)))**2
+        if i>0:
+            DE=E-PE ## Delta E
+            MSf=((Sf+PSf)/2)     ## Mean Sf
+            S0_Sf=S0-MSf
+            DX=DE/S0_Sf
+            if i==1:
+                L=-DX
             else:
-                L = PL - DX
+                L=PL-DX
     st.write('Final Length =', L)
-
+    
 def main():
     st.title("Hydraulic Calculations")
     S = st.sidebar.number_input("Slope (S)", value=0.000)
