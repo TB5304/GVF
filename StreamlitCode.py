@@ -1,15 +1,15 @@
 import math
 import streamlit as st
 def calculate(S, Yn, B, n, S0, Y,UOD='NA',PC=10):
-    st.write('Input Values:')
-    st.write("Slope (S) =", S)
-    st.write("Normal Depth (Yn) =", Yn)
-    st.write("Bottom Width (B) =", B)
-    st.write("Manning's Roughness Coefficient (n) =", n)
-    st.write("Channel Bed Slope (S0) =", S0)
-    st.write("Specific Energy (Y) =", Y)
-    st.write("Upstream or Downstream (UOD) =", UOD)
-    st.write("Percentage Change in Perimeter (PC) =", PC)
+#     st.write('Input Values:')
+#     st.write("Slope (S) =", S)
+#     st.write("Normal Depth (Yn) =", Yn)
+#     st.write("Bottom Width (B) =", B)
+#     st.write("Manning's Roughness Coefficient (n) =", n)
+#     st.write("Channel Bed Slope (S0) =", S0)
+#     st.write("Specific Energy (Y) =", Y)
+#     st.write("Upstream or Downstream (UOD) =", UOD)
+#     st.write("Percentage Change in Perimeter (PC) =", PC)
     
     t = 1
     shape = 'NA'
@@ -93,7 +93,7 @@ def calculate(S, Yn, B, n, S0, Y,UOD='NA',PC=10):
              PC=1-PC/100
     ed=Yn*PC
     XXM=[Y,float((ed+Y)/2),ed]
-    print(XXM)
+    st.write("Values = ", XXM)
     flag=0
     E=0
     for i in range(3):
