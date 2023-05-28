@@ -37,26 +37,26 @@ def calculate(S, Yn, B, n, S0, Y, UOD='NA', PC=10):
             Yc = ((q**2)/9.81) ** (1/3)
 
     if Yn > Yc:
-        st = "Mild"
+        stt = "Mild"
     elif Yn < Yc:
-        st = "Steep"
+        stt = "Steep"
     else:
-        st = "Critical"
+        stt = "Critical"
     Y0 = Yn
-    if st == "Mild" or st == "Steep":
+    if stt == "Mild" or stt == "Steep":
         if Y > Y0 and Y0 > Yc:
             Region = 1
         elif Y0 > Y and Y > Yc:
             Region = 2
         else:
             Region = 3 
-        curve = st[0] + str(Region)
+        curve = stt[0] + str(Region)
     else:
         if Y > Y0 and Y0 == Yc:
             Region = 1
         elif Y < Y0 and Y0 == Yc:
             Region = 3
-    curve = st[0] + str(Region)
+    curve = stt[0] + str(Region)
     
     st.write('Shape =', shape)
     st.write("Area = {:.2f}".format(A))
@@ -65,7 +65,7 @@ def calculate(S, Yn, B, n, S0, Y, UOD='NA', PC=10):
     st.write("Discharge = {:.2f}".format(Q))
     st.write("Unit discharge = {:.2f}".format(q))
     st.write("Critical depth = {:.2f}".format(Yc))
-    st.write("Slope Type = ", st)
+    st.write("Slope Type = ", stt)
     st.write("Curve Type = ", curve)
     
     ####################################GVF Length Calculation###########################
@@ -129,7 +129,7 @@ def main():
     B = st.sidebar.number_input("Bottom Width (B)", value=3.0)
     n = st.sidebar.number_input("Manning's Roughness Coefficient (n)", value=0.05)
     S0 = st.sidebar.number_input("Channel Bed Slope (S0)", value=1.5)
-    Y = st.sidebar.number_input("Specific Energy (Y)", value=1.2)
+    Y = st.sidebar.number_input("Flow Depth (Y)", value=1.2)
     UOD = st.sidebar.selectbox("Upstream or Downstream (UOD)", ["NA", "Upstream", "Downstream"])
     PC = st.sidebar.number_input("Percentage Change in Perimeter (PC)", value=10)
     
