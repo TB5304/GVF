@@ -82,9 +82,9 @@ def calculate(S, Yn, B, n, S0, Y,UOD='NA',PC=10):
         
     ####################################GVF Length Calculation###########################
     ## Calculating Middle Value
-    if UOD=='U':
+    if UOD=='Upstream':
         PC=1+PC/100
-    elif UOD=='D':
+    elif UOD=='Downstream':
         PC=1-PC/100
     else:
         if int(curve[-1])==1 or int(curve[-1])==3:
