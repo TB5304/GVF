@@ -136,16 +136,19 @@ def calculate(S, Yn, B, n, S0, Y,UOD='NA',PC=10):
     
 def main():
     st.title("Hydraulic Calculations")
-    S = st.sidebar.number_input("Slope (S)", value=0.000)
-    Yn = st.sidebar.number_input("Normal Depth (Yn)", value=2.0)
-    B = st.sidebar.number_input("Bottom Width (B)", value=3.0)
-    n = st.sidebar.number_input("Manning's Roughness Coefficient (n)", value=0.05)
-    S0 = st.sidebar.number_input("Channel Bed Slope (S0)", value=1.5)
-    Y = st.sidebar.number_input("Flow Depth (Y)", value=1.2)
+    
+    # Sidebar inputs
+    S = st.sidebar.number_input("Slope (S)", value=0.000, format="%.5f")
+    Yn = st.sidebar.number_input("Normal Depth (Yn)", value=2.0, format="%.5f")
+    B = st.sidebar.number_input("Bottom Width (B)", value=3.0, format="%.5f")
+    n = st.sidebar.number_input("Manning's Roughness Coefficient (n)", value=0.05, format="%.5f")
+    S0 = st.sidebar.number_input("Channel Bed Slope (S0)", value=1.5, format="%.5f")
+    Y = st.sidebar.number_input("Flow Depth (Y)", value=1.2, format="%.5f")
     UOD = st.sidebar.selectbox("Upstream or Downstream (UOD)", ["NA", "Upstream", "Downstream"])
-    PC = st.sidebar.number_input("Percentage Change in Perimeter (PC)", value=10)
+    PC = st.sidebar.number_input("Percentage Change in Perimeter (PC)", value=10, format="%.5f")
     
     if st.button("Calculate"):
+        # Call calculate function
         calculate(S, Yn, B, n, S0, Y, UOD, PC)
 
 if __name__ == '__main__':
